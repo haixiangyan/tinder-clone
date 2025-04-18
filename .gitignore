@@ -24,3 +24,6 @@ android
 
 .idea
 .vscode
+
+GoogleService-Info.plist
+google-services.json

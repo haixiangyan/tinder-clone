@@ -1,14 +1,28 @@
-import { createContext, FC, ReactNode } from 'react';
-import { View, Text } from 'react-native';
+import { createContext, FC, ReactNode, useContext } from 'react';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-interface AuthContextType {}
+interface AuthContextType {
+  user: string;
+}
 
-const AuthContext = createContext<AuthContextType>({});
+const AuthContext = createContext<AuthContextType>({
+  user: '',
+});
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  return <AuthContext.Provider value={null}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user: '',
+      }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
+export default function useAuth() {
+  return useContext(AuthContext);
+}
