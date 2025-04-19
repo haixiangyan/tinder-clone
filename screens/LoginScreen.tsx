@@ -1,9 +1,9 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 import useAuth from 'hooks/useAuth';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, LogBox } from 'react-native';
 
 const LoginScreen = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   console.log('user', user);
 
@@ -24,9 +24,14 @@ const LoginScreen = () => {
             });
 
             console.log('credential', credential);
+            setUser?.(credential);
             // signed in
           } catch (e) {
-            console.error('apple signin error', e)
+            console.error('apple signin error', JSON.stringify(e));
+
+            if (e.code === 'ERR_REQUEST_CANCELED') {
+              LogBox.ignoreAllLogs();
+            }
           }
         }}
       />
