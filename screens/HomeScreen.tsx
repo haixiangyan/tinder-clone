@@ -4,13 +4,13 @@ import { View, Text, Button } from 'react-native';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const { setUser } = useAuth();
+  const { logout } = useAuth();
 
   return (
     <View>
       <Text>HomeScreen</Text>
       <Button title="Go to Chat Screen" onPress={() => navigation.navigate('Chat')} />
-      <Button title="Logout" onPress={() => setUser?.(null)} />
+      <Button title="Logout" onPress={logout} />
     </View>
   );
 };
