@@ -4,6 +4,8 @@ import * as Device from 'expo-device';
 import * as SecureStore from 'expo-secure-store';
 import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'react';
 
+import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
+
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -68,7 +70,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     SecureStore.deleteItemAsync('credential');
   };
 
-  return <AuthContext.Provider value={{ user, logout }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, setUser, logout }}>{children}</AuthContext.Provider>;
 };
 
 export default function useAuth() {
