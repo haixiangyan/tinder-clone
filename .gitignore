@@ -27,3 +27,5 @@ android
 
 GoogleService-Info.plist
 google-services.json
+
+secret.ts

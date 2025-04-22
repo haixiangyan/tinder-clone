@@ -49,7 +49,7 @@ const HomeScreen = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Modal')}>
           <Image className="h-14 w-14" source={require('../logo.jpg')} />
         </TouchableOpacity>
 
