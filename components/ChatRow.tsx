@@ -1,5 +1,7 @@
+import { collection, DocumentData, onSnapshot, orderBy, Query, query } from '@firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { randomUUID } from 'expo-crypto';
+import db from 'firebase';
 import useAuth from 'hooks/useAuth';
 import getMatchedUseInfo from 'libs/getMatchedUseInfo';
 import { FC, useEffect, useState } from 'react';
@@ -14,6 +16,7 @@ const ChatRow: FC<Props> = (props) => {
 
   const navigation = useNavigation();
   const [matchedUserInfo, setMatchedUserInfo] = useState<any>(null);
+  const [lastMessage, setLastMessage] = useState('');
 
   const { user } = useAuth();
 
@@ -21,7 +24,14 @@ const ChatRow: FC<Props> = (props) => {
     setMatchedUserInfo(getMatchedUseInfo(matchDetails.users, user?.user || randomUUID()));
   }, [matchDetails, user]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    return onSnapshot(
+      query(collection(db, 'matches', matchDetails.id, 'messages'), orderBy('timestamp', 'desc')),
+      (snapshot) => {
+        setLastMessage(snapshot.docs[0]?.data()?.message);
+      }
+    );
+  }, [matchDetails, db]);
 
   return (
     <TouchableOpacity
@@ -35,7 +45,7 @@ const ChatRow: FC<Props> = (props) => {
 
       <View>
         <Text className="text-lg font-semibold">{matchedUserInfo?.displayName}</Text>
-        <Text>Say Hi</Text>
+        <Text>{lastMessage}</Text>
       </View>
     </TouchableOpacity>
   );

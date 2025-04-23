@@ -29,3 +29,10 @@ GoogleService-Info.plist
 google-services.json
 
 secret.ts
+
+# e.g.
+# export const firebaseConfig = {
+#   apiKey: '',
+#   authDomain: '',
+#   projectId: '',
+# }
