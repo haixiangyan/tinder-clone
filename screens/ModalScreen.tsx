@@ -1,15 +1,10 @@
-import { initializeApp } from '@firebase/app';
-import { doc, setDoc, serverTimestamp, getFirestore } from '@firebase/firestore';
+import { doc, setDoc, serverTimestamp } from '@firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { randomUUID } from 'expo-crypto';
+import db from 'firebase';
 import useAuth from 'hooks/useAuth';
 import { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-import { firebaseConfig } from 'secret';
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
 
 const ModalScreen = () => {
   const { user } = useAuth();
