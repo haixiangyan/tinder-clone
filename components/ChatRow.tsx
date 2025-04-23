@@ -45,7 +45,7 @@ const ChatRow: FC<Props> = (props) => {
 
       <View>
         <Text className="text-lg font-semibold">{matchedUserInfo?.displayName}</Text>
-        <Text>{lastMessage}</Text>
+        <Text>{lastMessage || 'Say Hi!'}</Text>
       </View>
     </TouchableOpacity>
   );
