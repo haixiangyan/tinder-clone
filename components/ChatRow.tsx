@@ -24,7 +24,13 @@ const ChatRow: FC<Props> = (props) => {
   useEffect(() => {}, []);
 
   return (
-    <TouchableOpacity className="mx-3 my-1 flex-row items-center rounded-lg bg-white px-5 py-3 shadow-sm">
+    <TouchableOpacity
+      className="mx-3 my-1 flex-row items-center rounded-lg bg-white px-5 py-3 shadow-sm"
+      onPress={() =>
+        navigation.navigate('Message', {
+          matchDetails,
+        })
+      }>
       <Image className="mr-4 h-16 w-16 rounded-full" source={{ uri: matchedUserInfo?.photoURL }} />
 
       <View>
